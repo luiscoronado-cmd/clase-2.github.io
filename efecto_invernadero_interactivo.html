@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClimaTech | Efecto Invernadero</title>
+    <!-- Tailwind CSS para el diseño rápido y responsive -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome (Iconos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        /* Ocultar secciones dinámicamente */
+        .hidden-section {
+            display: none !important;
+        }
+        /* Estilos personalizados para scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #10b981; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #059669; 
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .correct-answer {
+            background-color: #d1fae5 !important;
+            border-color: #10b981 !important;
+        }
+        .incorrect-answer {
+            background-color: #fee2e2 !important;
+            border-color: #ef4444 !important;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <nav class="bg-emerald-700 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-earth-americas text-2xl mr-2"></i>
+                    <span class="font-bold text-xl tracking-wider">EcoAprende 11°</span>
+                </div>
+                <!-- Menú Desktop -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <button onclick="navigate('home')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-emerald-600 transition" data-target="home">Inicio</button>
+                        <button onclick="navigate('context')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-emerald-600 transition" data-target="context">Contextualización</button>
+                        <button onclick="navigate('simple-quiz')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-emerald-600 transition" data-target="simple-quiz">Ejercicios Simples</button>
+                        <button onclick="navigate('icfes-quiz')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-emerald-600 transition" data-target="icfes-quiz">Desafío ICFES</button>
+                        <button onclick="navigate('readings')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-emerald-600 transition" data-target="readings">Lecturas</button>
+                    </div>
+                </div>
+                <!-- Botón Menú Móvil -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md hover:text-white hover:bg-emerald-600 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Menú Móvil (oculto por defecto) -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-emerald-800">
+                <button onclick="navigate('home')" class="block px-3 py-2 rounded-md text-base font-medium w-full text-left hover:bg-emerald-600">Inicio</button>
+                <button onclick="navigate('context')" class="block px-3 py-2 rounded-md text-base font-medium w-full text-left hover:bg-emerald-600">Contextualización</button>
+                <button onclick="navigate('simple-quiz')" class="block px-3 py-2 rounded-md text-base font-medium w-full text-left hover:bg-emerald-600">Ejercicios Simples</button>
+                <button onclick="navigate('icfes-quiz')" class="block px-3 py-2 rounded-md text-base font-medium w-full text-left hover:bg-emerald-600">Desafío ICFES</button>
+                <button onclick="navigate('readings')" class="block px-3 py-2 rounded-md text-base font-medium w-full text-left hover:bg-emerald-600">Lecturas</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow w-full max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <!-- SECCIÓN 1: INICIO -->
+        <section id="home" class="section-container fade-in">
+            <div class="bg-white rounded-xl shadow-xl overflow-hidden">
+                <div class="bg-emerald-600 p-8 text-white text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">El Efecto Invernadero y Nuestro Futuro</h1>
+                    <p class="text-lg md:text-xl font-light max-w-3xl mx-auto">Una exploración científica integral para estudiantes de grado 11°, preparándote para entender los retos globales y superar las pruebas Saber 11.</p>
+                </div>
+                <div class="p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-emerald-500 pb-2">Introducción al Tema</h2>
+                            <p class="text-gray-600 leading-relaxed text-justify mb-4">
+                                Nuestro planeta se encuentra en una encrucijada climática. El efecto invernadero, un fenómeno natural que hace posible la vida en la Tierra, ha sido alterado por la actividad humana desde la Revolución Industrial. Como futuros ciudadanos y profesionales, comprender la ciencia detrás de este fenómeno no solo es crucial para el examen de Estado (ICFES), sino para la toma de decisiones críticas en nuestra sociedad.
+                            </p>
+                            <p class="text-gray-600 leading-relaxed text-justify">
+                                Esta plataforma está diseñada bajo los lineamientos científicos del IPCC (Panel Intergubernamental sobre Cambio Climático) y la ONU, para brindarte conocimientos verificados y herramientas analíticas.
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                            <h3 class="text-xl font-bold text-emerald-700 mb-4"><i class="fa-solid fa-bullseye mr-2"></i>Objetivos de Aprendizaje</h3>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mt-1 mr-3"></i> <span>Comprender los mecanismos físicos y químicos del efecto invernadero natural y antropogénico.</span></li>
+                                <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mt-1 mr-3"></i> <span>Identificar las causas, consecuencias y gases principales que alteran el clima global.</span></li>
+                                <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mt-1 mr-3"></i> <span>Analizar el impacto del esmog y el cambio climático en ecosistemas y sociedades.</span></li>
+                                <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mt-1 mr-3"></i> <span>Desarrollar habilidades de interpretación de textos científicos e infografías tipo ICFES.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-8 text-center">
+                        <button onclick="navigate('context')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:-translate-y-1">Empezar a Aprender <i class="fa-solid fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: CONTEXTUALIZACIÓN -->
+        <section id="context" class="section-container hidden-section fade-in">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-l-4 border-emerald-500 pl-4">Contextualización Científica</h2>
+            
+            <div class="space-y-8">
+                <!-- Tarjeta 1: ¿Qué es? -->
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-2xl font-semibold text-emerald-700 mb-3">¿Qué es el Efecto Invernadero?</h3>
+                    <p class="text-gray-700 leading-relaxed text-justify mb-4">
+                        Es un proceso físico natural mediante el cual ciertos gases en la atmósfera terrestre retienen parte de la energía que el suelo emite tras haber sido calentado por la radiación solar. Sin este efecto, la temperatura media de la Tierra sería de aproximadamente -18°C, en lugar de los cómodos 15°C actuales. El problema radica en el <strong>efecto invernadero intensificado o antropogénico</strong>, causado por el exceso de emisiones humanas, que retiene más calor del necesario.
+                    </p>
+                    
+                    <div class="my-6 flex flex-col items-center bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <img src="img/img 1 contextualizacion.png" alt="Esquema del Efecto Invernadero" class="rounded-lg shadow-sm w-full max-w-2xl mb-3">
+                       
+                    </div>
+                </div>
+
+                <!-- Grid: Causas y Consecuencias -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-red-500">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3"><i class="fa-solid fa-fire text-red-500 mr-2"></i>Principales Causas</h3>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-700 text-justify">
+                            <li><strong>Quema de combustibles fósiles:</strong> Carbón, petróleo y gas natural liberan enormes cantidades de CO2 secuestrado por millones de años.</li>
+                            <li><strong>Deforestación:</strong> Los árboles absorben CO2. Al talarlos (ej. Amazonía), no solo se reduce esta capacidad de absorción, sino que la quema de madera libera el carbono almacenado.</li>
+                            <li><strong>Agricultura y ganadería intensiva:</strong> Los fertilizantes nitrogenados liberan óxido nitroso (N2O) y el sistema digestivo de los rumiantes produce metano (CH4).</li>
+                            <li><strong>Gestión de residuos:</strong> La descomposición de basura en vertederos anaeróbicos genera metano de alta concentración.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-orange-500">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3"><i class="fa-solid fa-temperature-arrow-up text-orange-500 mr-2"></i>Consecuencias Físicas</h3>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-700 text-justify">
+                            <li><strong>Calentamiento Global:</strong> Aumento progresivo de la temperatura media de la superficie terrestre y oceánica.</li>
+                            <li><strong>Deshielo polar y retroceso de glaciares:</strong> Reduce el "efecto albedo" (capacidad de reflejar luz) y aumenta la absorción de calor oceánico.</li>
+                            <li><strong>Aumento del nivel del mar:</strong> Producto de la expansión térmica del agua (el agua caliente ocupa más volumen) y el derretimiento de hielos continentales.</li>
+                            <li><strong>Acidificación oceánica:</strong> Los océanos absorben el 30% del CO2 emitido, alterando su pH y destruyendo corales.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Tarjeta: Gases -->
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-2xl font-semibold text-emerald-700 mb-4">Gases de Efecto Invernadero (GEI)</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white border border-gray-200">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Gas</th>
+                                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Símbolo</th>
+                                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Fuentes Principales</th>
+                                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Potencial de Calentamiento (PCA)*</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="py-2 px-4 border-b">Dióxido de Carbono</td>
+                                    <td class="py-2 px-4 border-b font-mono">CO2</td>
+                                    <td class="py-2 px-4 border-b">Combustibles fósiles, deforestación</td>
+                                    <td class="py-2 px-4 border-b">1 (Línea base)</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-4 border-b">Metano</td>
+                                    <td class="py-2 px-4 border-b font-mono">CH4</td>
+                                    <td class="py-2 px-4 border-b">Ganadería, vertederos, extracción de gas</td>
+                                    <td class="py-2 px-4 border-b">28 - 36 veces > CO2</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-4 border-b">Óxido Nitroso</td>
+                                    <td class="py-2 px-4 border-b font-mono">N2O</td>
+                                    <td class="py-2 px-4 border-b">Fertilizantes agrícolas, procesos industriales</td>
+                                    <td class="py-2 px-4 border-b">265 - 298 veces > CO2</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-4 border-b">Gases Fluorados</td>
+                                    <td class="py-2 px-4 border-b font-mono">CFCs, HFCs</td>
+                                    <td class="py-2 px-4 border-b">Refrigerantes, aerosoles (actividad 100% humana)</td>
+                                    <td class="py-2 px-4 border-b">Miles de veces > CO2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">* PCA a 100 años respecto al CO2 (Datos IPCC AR5/AR6).</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-100 p-6 rounded-xl border border-slate-300">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3"><i class="fa-solid fa-smog text-gray-600 mr-2"></i>El Esmog y los Ecosistemas</h3>
+                        <p class="text-gray-700 text-justify mb-2">El <strong>esmog fotoquímico</strong> se forma cuando óxidos de nitrógeno (NOx) y compuestos orgánicos volátiles (COV) reaccionan con la luz solar creando ozono troposférico (O3).</p>
+                        <p class="text-gray-700 text-justify"><strong>Efecto en ecosistemas:</strong> El O3 a nivel del suelo es tóxico. Daña las hojas de las plantas, reduciendo la fotosíntesis y el crecimiento de bosques y cultivos, lo que indirectamente reduce la captura de CO2, formando un ciclo de retroalimentación positiva que agrava el clima.</p>
+                    </div>
+                    <div class="bg-slate-100 p-6 rounded-xl border border-slate-300">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3"><i class="fa-solid fa-people-group text-blue-600 mr-2"></i>Impacto Social y Prevención</h3>
+                        <p class="text-gray-700 text-justify mb-2"><strong>Sociedad:</strong> Migraciones climáticas, pérdida de seguridad alimentaria, aumento de enfermedades vectoriales (ej. dengue en pisos térmicos más altos).</p>
+                        <p class="text-gray-700 text-justify"><strong>Prevención (Mitigación y Adaptación):</strong> Transición a energías renovables (solar, eólica), eficiencia energética, reforestación, economía circular, y compromisos internacionales como el <em>Acuerdo de París</em>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: EJERCICIOS SIMPLES -->
+        <section id="simple-quiz" class="section-container hidden-section fade-in">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2 border-l-4 border-blue-500 pl-4">Práctica de Afianzamiento</h2>
+            <p class="text-gray-600 mb-6">Evalúa tu comprensión básica de los conceptos. No hay límite de tiempo. Selecciona una respuesta por pregunta.</p>
+            
+            <div id="simple-quiz-container" class="space-y-6">
+                <!-- Generado por JS -->
+            </div>
+
+            <div class="mt-8 flex space-x-4">
+                <button onclick="checkSimpleQuiz()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition shadow">Revisar Respuestas</button>
+                <button onclick="resetSimpleQuiz()" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg transition shadow">Reiniciar Prueba</button>
+            </div>
+            
+            <div id="simple-quiz-results" class="mt-6 hidden bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-500">
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">Resultados</h3>
+                <p id="simple-score-display" class="text-lg font-semibold mb-4"></p>
+                <div id="simple-feedback-container" class="space-y-4">
+                    <!-- Feedback generado por JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: DESAFÍO TIPO ICFES -->
+        <section id="icfes-quiz" class="section-container hidden-section fade-in">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-6 border-b-2 border-purple-500 pb-2">
+                <h2 class="text-3xl font-bold text-gray-800 border-l-4 border-purple-500 pl-4">Desafío Tipo Pruebas Saber 11</h2>
+                <div class="mt-4 md:mt-0 flex items-center bg-gray-100 py-2 px-4 rounded-full font-mono text-xl font-bold text-gray-700 shadow-inner">
+                    <i class="fa-regular fa-clock mr-2 text-purple-600"></i>
+                    <span id="timer-display">27:00</span>
+                </div>
+            </div>
+            
+            <!-- Tips ICFES -->
+            <div id="icfes-intro" class="bg-purple-50 p-6 rounded-xl border border-purple-200 mb-8">
+                <h3 class="text-xl font-bold text-purple-800 mb-4"><i class="fa-solid fa-lightbulb text-yellow-500 mr-2"></i>4 Tips Clave para Ciencias Naturales ICFES</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <h4 class="font-bold text-purple-700">1. Lee el contexto, no adivines</h4>
+                        <p class="text-sm text-gray-600">Toda la información necesaria suele estar en el texto introductorio o en la gráfica. ¡Lee detenidamente antes de mirar las opciones!</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <h4 class="font-bold text-purple-700">2. Interpreta las tendencias gráficas</h4>
+                        <p class="text-sm text-gray-600">Si hay una gráfica, identifica qué mide el eje X, qué mide el eje Y y cómo se relacionan (directa o inversamente proporcional).</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <h4 class="font-bold text-purple-700">3. Cuidado con los distractores absolutos</h4>
+                        <p class="text-sm text-gray-600">Desconfía de opciones que usen palabras como "siempre", "nunca", "todos", "ninguno" en sistemas complejos ambientales.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <h4 class="font-bold text-purple-700">4. Relaciona CTS (Ciencia, Tecnología, Sociedad)</h4>
+                        <p class="text-sm text-gray-600">El ICFES evalúa cómo la ciencia afecta la sociedad. Piensa en el impacto ambiental y las soluciones sociales de los fenómenos.</p>
+                    </div>
+                </div>
+                <div class="mt-6 text-center">
+                    <button id="start-icfes-btn" onclick="startIcfesTest()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:-translate-y-1 text-lg">Iniciar Prueba (27 Minutos)</button>
+                </div>
+            </div>
+
+            <!-- Contenedor Preguntas (Oculto hasta iniciar) -->
+            <div id="icfes-quiz-area" class="hidden">
+                <div id="icfes-quiz-container" class="space-y-10">
+                    <!-- Generado por JS -->
+                </div>
+                <div class="mt-10 flex space-x-4 border-t pt-6">
+                    <button onclick="checkIcfesQuiz()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-lg transition shadow text-lg w-full md:w-auto">Entregar y Revisar Prueba</button>
+                    <button onclick="resetIcfesQuiz()" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg transition shadow text-lg w-full md:w-auto">Reiniciar Todo</button>
+                </div>
+            </div>
+
+            <div id="icfes-quiz-results" class="mt-8 hidden bg-white p-6 rounded-xl shadow-md border-t-4 border-purple-500">
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">Informe Analítico ICFES</h3>
+                <p id="icfes-score-display" class="text-xl font-semibold mb-6"></p>
+                <div id="icfes-feedback-container" class="space-y-6">
+                    <!-- Feedback generado por JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: LECTURAS -->
+        <section id="readings" class="section-container hidden-section fade-in">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2 border-l-4 border-amber-500 pl-4">Hemeroteca Científica</h2>
+            <p class="text-gray-600 mb-8">Mejora tu comprensión lectora y deducción de vocabulario por contexto (competencia evaluada en ICFES lectura crítica). Selecciona un artículo.</p>
+            
+            <!-- Grid de Lecturas -->
+            <div id="readings-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+                <!-- Generado por JS -->
+            </div>
+
+            <!-- Vista de Lectura Individual -->
+            <div id="reading-detail" class="hidden bg-white p-8 rounded-xl shadow-lg mt-6">
+                <button onclick="backToReadings()" class="mb-6 text-amber-600 hover:text-amber-800 font-semibold flex items-center transition">
+                    <i class="fa-solid fa-arrow-left mr-2"></i> Volver a lecturas
+                </button>
+                <div class="text-center mb-6">
+                    <i id="reading-detail-icon" class="fa-solid text-5xl text-amber-500 mb-4"></i>
+                    <h3 id="reading-detail-title" class="text-3xl font-bold text-gray-800">Título</h3>
+                </div>
+                <div id="reading-detail-content" class="text-gray-700 leading-loose text-justify text-lg space-y-4">
+                    <!-- Contenido JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="bg-gray-800 text-gray-300 py-6 text-center mt-auto">
+        <p>© 2026 Plataforma Educativa ClimaTech. Diseño exclusivo para preparación ICFES Grado 11.</p>
+        <p class="text-sm mt-2 text-gray-500">Fundamentado en reportes IPCC, NOAA y ministerios de ambiente.</p>
+    </footer>
+
+    <script>
+        /* ==========================================
+           LÓGICA DE NAVEGACIÓN SPA
+           ========================================== */
+        function navigate(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section-container').forEach(el => {
+                el.classList.add('hidden-section');
+                el.classList.remove('fade-in');
+            });
+            // Mostrar la sección objetivo
+            const target = document.getElementById(sectionId);
+            target.classList.remove('hidden-section');
+            // Trigger reflow para animación
+            void target.offsetWidth; 
+            target.classList.add('fade-in');
+
+            // Actualizar estado del menú móvil
+            document.getElementById('mobile-menu').classList.add('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        /* ==========================================
+           DATOS: EJERCICIOS SIMPLES (5 Preguntas)
+           ========================================== */
+        const simpleQuestions = [
+            {
+                q: "¿Cuál de los siguientes NO es un gas de efecto invernadero principal?",
+                options: {
+                    A: "Dióxido de Carbono (CO2)",
+                    B: "Metano (CH4)",
+                    C: "Nitrógeno (N2)",
+                    D: "Óxido Nitroso (N2O)"
+                },
+                correct: "C",
+                feedback: {
+                    A: "Incorrecto. El CO2 es el GEI de referencia más abundante por actividad humana.",
+                    B: "Incorrecto. El Metano es un potente GEI derivado de ganadería y vertederos.",
+                    C: "¡Correcto! El Nitrógeno gaseoso (N2) compone el 78% de la atmósfera y NO atrapa radiación infrarroja, por ende no es un GEI.",
+                    D: "Incorrecto. El N2O es un GEI proveniente principalmente de fertilizantes.",
+                    study: "Composición de la atmósfera y propiedades químicas de los gases moleculares frente a la radiación térmica."
+                }
+            },
+            {
+                q: "El efecto invernadero natural es responsable de:",
+                options: {
+                    A: "El derretimiento acelerado de los glaciares en el siglo XXI.",
+                    B: "Mantener la Tierra a una temperatura promedio de 15°C, permitiendo la vida.",
+                    C: "La formación del agujero en la capa de ozono.",
+                    D: "La lluvia ácida en zonas industriales."
+                },
+                correct: "B",
+                feedback: {
+                    A: "Incorrecto. Eso es consecuencia del efecto invernadero ANTROPOGÉNICO (aumentado por el ser humano).",
+                    B: "¡Correcto! Es un proceso natural vital; sin él, la Tierra estaría a -18°C.",
+                    C: "Incorrecto. La capa de ozono es destruida por CFCs, es un problema atmosférico distinto al efecto invernadero (aunque los CFCs también actúan como GEI).",
+                    D: "Incorrecto. La lluvia ácida es causada por SO2 y NOx, no por el efecto invernadero.",
+                    study: "Diferencia entre el efecto invernadero natural e intensificado (antropogénico)."
+                }
+            },
+            {
+                q: "¿Qué actividad humana es la principal responsable del aumento de metano (CH4) en la atmósfera?",
+                options: {
+                    A: "La deforestación del bosque húmedo tropical.",
+                    B: "La combustión de gasolina en los vehículos.",
+                    C: "El uso masivo de aerosoles para el cabello.",
+                    D: "La ganadería extensiva y el cultivo de arroz."
+                },
+                correct: "D",
+                feedback: {
+                    A: "Incorrecto. La deforestación aporta principalmente CO2 por la quema de biomasa y pérdida de sumideros.",
+                    B: "Incorrecto. Los vehículos emiten principalmente CO2 y NOx.",
+                    C: "Incorrecto. Los aerosoles antiguos emitían CFCs (afectan ozono), no metano.",
+                    D: "¡Correcto! La fermentación entérica en rumiantes (vacas) y la descomposición anaeróbica en arrozales son las mayores fuentes humanas de metano.",
+                    study: "Fuentes de emisión de cada Gas de Efecto Invernadero específico."
+                }
+            },
+            {
+                q: "En el contexto del cambio climático, el 'Efecto Albedo' se refiere a:",
+                options: {
+                    A: "La capacidad de absorción de CO2 por parte del plancton oceánico.",
+                    B: "La medida de cuánta radiación solar es reflejada de vuelta al espacio por una superficie.",
+                    C: "El aumento de la intensidad de los huracanes debido al calentamiento del agua.",
+                    D: "La acumulación de calor en las grandes ciudades (islas de calor)."
+                },
+                correct: "B",
+                feedback: {
+                    A: "Incorrecto. Eso se relaciona con el ciclo del carbono y bombas biológicas oceánicas.",
+                    B: "¡Correcto! Las superficies claras (hielo, nieve) tienen alto albedo y reflejan mucha luz; las oscuras (océano, asfalto) tienen bajo albedo y absorben calor.",
+                    C: "Incorrecto. Esto es termodinámica climática, pero no es albedo.",
+                    D: "Incorrecto. Se llama efecto isla de calor urbana, originado por materiales de construcción y pérdida de vegetación.",
+                    study: "Conceptos físicos de radiación: reflexión, refracción y absorción en superficies terrestres."
+                }
+            },
+            {
+                q: "El esmog fotoquímico impacta negativamente a los ecosistemas vegetales porque:",
+                options: {
+                    A: "Contiene ozono troposférico que daña los tejidos foliares y reduce la fotosíntesis.",
+                    B: "Genera una capa física de hollín que impide que la lluvia llegue a las raíces.",
+                    C: "Atrae plagas de insectos que se alimentan de la corteza de los árboles.",
+                    D: "Aumenta la fijación de nitrógeno en el suelo de manera descontrolada."
+                },
+                correct: "A",
+                feedback: {
+                    A: "¡Correcto! El ozono a nivel de superficie es un fuerte oxidante tóxico que necrosa las hojas de las plantas y limita su crecimiento.",
+                    B: "Incorrecto. Aunque el material particulado existe, el principal daño biológico del esmog fotoquímico es químico por el ozono.",
+                    C: "Incorrecto. No hay evidencia directa de esto como mecanismo primario de daño.",
+                    D: "Incorrecto. El esmog no se fija en el suelo como nutriente útil.",
+                    study: "Química atmosférica y toxicidad de contaminantes secundarios en la botánica."
+                }
+            }
+        ];
+
+        function renderSimpleQuiz() {
+            const container = document.getElementById('simple-quiz-container');
+            container.innerHTML = '';
+            simpleQuestions.forEach((q, index) => {
+                let html = `
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200" id="sq-card-${index}">
+                    <p class="font-bold text-lg text-gray-800 mb-4">${index + 1}. ${q.q}</p>
+                    <div class="space-y-3">
+                `;
+                for (const [letter, text] of Object.entries(q.options)) {
+                    html += `
+                        <label class="flex items-start p-3 rounded-lg border border-gray-200 cursor-pointer hover:bg-blue-50 transition" id="sq-label-${index}-${letter}">
+                            <input type="radio" name="sq-${index}" value="${letter}" class="mt-1 mr-3 h-4 w-4 text-blue-600">
+                            <span class="text-gray-700"><strong class="mr-1">${letter})</strong> ${text}</span>
+                        </label>
+                    `;
+                }
+                html += `</div>
+                    <div id="sq-feedback-${index}" class="mt-4 hidden p-4 rounded-lg text-sm"></div>
+                </div>`;
+                container.innerHTML += html;
+            });
+        }
+
+        function checkSimpleQuiz() {
+            let score = 0;
+            const resultsContainer = document.getElementById('simple-quiz-results');
+            const feedbackContainer = document.getElementById('simple-feedback-container');
+            const scoreDisplay = document.getElementById('simple-score-display');
+            
+            feedbackContainer.innerHTML = ''; // Limpiar previo
+
+            simpleQuestions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="sq-${index}"]:checked`);
+                const feedbackDiv = document.getElementById(`sq-feedback-${index}`);
+                feedbackDiv.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800');
+                
+                // Reiniciar estilos visuales de las opciones
+                Object.keys(q.options).forEach(letter => {
+                    const label = document.getElementById(`sq-label-${index}-${letter}`);
+                    label.classList.remove('correct-answer', 'incorrect-answer');
+                });
+
+                if (!selected) {
+                    feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-exclamation mr-2"></i> No seleccionaste ninguna respuesta.`;
+                    feedbackDiv.classList.add('bg-yellow-100', 'text-yellow-800', 'block');
+                    return; // saltar a la siguiente
+                }
+
+                const ans = selected.value;
+                const correctLabel = document.getElementById(`sq-label-${index}-${q.correct}`);
+                
+                if (ans === q.correct) {
+                    score++;
+                    correctLabel.classList.add('correct-answer');
+                    feedbackDiv.classList.add('bg-green-100', 'text-green-800', 'block');
+                    feedbackDiv.innerHTML = `<strong>¡Excelente! Respuesta ${q.correct}.</strong><br>${q.feedback[ans]}`;
+                } else {
+                    const wrongLabel = document.getElementById(`sq-label-${index}-${ans}`);
+                    wrongLabel.classList.add('incorrect-answer');
+                    correctLabel.classList.add('correct-answer'); // Mostrar la correcta
+                    
+                    feedbackDiv.classList.add('bg-red-100', 'text-red-800', 'block');
+                    feedbackDiv.innerHTML = `<strong>Respuesta seleccionada (${ans}) es incorrecta.</strong><br>${q.feedback[ans]}<br><br>
+                    <strong>La respuesta correcta era ${q.correct}:</strong> ${q.feedback[q.correct]}<br>
+                    <span class="mt-2 block font-semibold"><i class="fa-solid fa-book-open text-blue-600 mr-2"></i>Qué debes repasar:</span> ${q.feedback.study}`;
+                }
+            });
+
+            resultsContainer.classList.remove('hidden');
+            scoreDisplay.innerHTML = `Obtuviste <span class="${score >= 3 ? 'text-green-600' : 'text-red-600'} text-2xl">${score}</span> de 5 respuestas correctas.`;
+        }
+
+        function resetSimpleQuiz() {
+            renderSimpleQuiz(); // Re-render limpia selecciones
+            document.getElementById('simple-quiz-results').classList.add('hidden');
+            window.scrollTo({ top: document.getElementById('simple-quiz').offsetTop, behavior: 'smooth' });
+        }
+
+        const icfesQuestions = [
+            {
+                context: "La gráfica muestra la Curva de Keeling, que registra las concentraciones de CO2 atmosférico medidas en el Observatorio de Mauna Loa (Hawái) desde 1958. Se observa una tendencia general ascendente año tras año, pero también un patrón en forma de 'sierra' o zigzag anual.",
+                image: "img/imagen de contexto pregunta 1.png",
+               
+                q: "A partir de la interpretación de la gráfica, ¿a qué se debe el patrón de zigzag interanual (subidas y bajadas dentro del mismo año)?",
+                options: {
+                    A: "A las variaciones en las emisiones industriales que disminuyen durante las vacaciones de fin de año en el hemisferio norte.",
+                    B: "A la respiración y fotosíntesis estacional de la biosfera terrestre, principalmente los grandes bosques del hemisferio norte durante primavera/verano.",
+                    C: "A los ciclos de manchas solares que alteran la radiación electromagnética absorbida por los satélites de medición anualmente.",
+                    D: "Al aumento de erupciones volcánicas estacionales durante el invierno en el cinturón de fuego del Pacífico."
+                },
+                correct: "B",
+                feedback: {
+                    A: "Incorrecto. Las emisiones antropogénicas no tienen una variación estacional tan masiva capaz de generar ese zigzag geofísico.",
+                    B: "Correcto. El hemisferio norte tiene mayor masa terrestre forestal. En primavera/verano, la vegetación absorbe mucho CO2 (baja la curva). En otoño/invierno pierden hojas y el CO2 vuelve a subir por respiración y descomposición.",
+                    C: "Incorrecto. Los ciclos solares duran ~11 años y no explican la oscilación del CO2.",
+                    D: "Incorrecto. La actividad volcánica es impredecible y no sigue estaciones del año.",
+                    study: "Ciclo global del carbono y fenología (cambios estacionales) en los ecosistemas globales."
+                }
+            },
+            {
+                context: "En un ecosistema marino del Caribe colombiano, los biólogos han notado un blanqueamiento masivo de corales. Se sabe que alrededor del 30% del CO₂ antropogénico emitido es absorbido por los océanos. Al disolverse, el CO₂ reacciona con el agua formando ácido carbónico (H₂CO₃), que luego se disocia liberando iones de hidrógeno (H⁺). El aumento de H⁺ disminuye el pH del agua (acidificación oceánica) y reduce la disponibilidad de iones carbonato (CO₃²⁻), necesarios para que los corales construyan sus esqueletos de carbonato de calcio.",
+                q: "Desde un punto de vista químico y biológico, ¿cómo afecta este proceso directamente a los organismos calcificadores como los corales?",
+                options: {
+                    A: "Aumenta el pH del agua, volviéndola más alcalina y acelerando el crecimiento incontrolado del esqueleto de carbonato.",
+                    B: "El incremento de iones H+ disminuye el pH del océano (acidificación) y reacciona con el carbonato, dejando menos iones carbonato disponibles para que los corales construyan sus esqueletos.",
+                    C: "El CO2 absorbe el oxígeno disuelto en el agua, causando que los corales mueran por asfixia directa al no poder realizar fotosíntesis.",
+                    D: "El ácido carbónico calienta directamente el agua a nivel local, derritiendo las estructuras de carbonato cálcico de forma física."
+                },
+                correct: "B",
+                feedback: {
+                    A: "Incorrecto. Aumentar iones H+ DISMINUYE el pH, no lo aumenta (es acidificación, no alcalinización).",
+                    B: "Correcto. La ecuación es: CO2 + H2O -> H2CO3 -> H+ + HCO3-. El exceso de H+ atrapa al ion carbonato (CO3--) circulante. Sin carbonato libre, corales y bivalvos no pueden precipitar Carbonato de Calcio (CaCO3) para sus conchas.",
+                    C: "Incorrecto. La hipoxia (falta de oxígeno) es otro problema, pero no por reacción directa entre CO2 y O2.",
+                    D: "Incorrecto. La disolución de gases en líquidos es exotérmica pero no 'derrite' por calor el arrecife, lo disuelve químicamente.",
+                    study: "Acidificación oceánica y equilibrio químico de los carbonatos."
+                }
+            },
+            {
+                context: "La imagen modela el derretimiento del hielo marino en el Ártico durante los últimos 40 años. El hielo blanco refleja aproximadamente el 80% de la radiación solar entrante. Cuando el hielo se derrite, revela el océano oscuro, que refleja solo el 10% y absorbe el 90% restante.",
+                image: "img/imagen de contexto pregunta 3.png",
+               q: "Este fenómeno es un ejemplo clásico en climatología de:",
+                options: {
+                    A: "Retroalimentación negativa: el sistema intenta equilibrarse enfriando más rápido el océano oscuro.",
+                    B: "Efecto de Coriolis: el cambio en corrientes desvía la radiación hacia el ecuador.",
+                    C: "Retroalimentación positiva: un calentamiento inicial causa derretimiento, lo que aumenta la absorción de calor, causando aún más calentamiento y derretimiento.",
+                    D: "Sumidero de carbono: el hielo derretido captura inmediatamente los gases de efecto invernadero del ambiente."
+                },
+                correct: "C",
+                feedback: {
+                    A: "Incorrecto. Una retroalimentación negativa estabiliza el sistema. Aquí el calentamiento se acelera a sí mismo.",
+                    B: "Incorrecto. Coriolis aplica a la dirección de vientos y corrientes por la rotación terrestre, no a la reflectividad térmica.",
+                    C: "Correcto. Es un ciclo vicioso. Menos hielo = menor albedo = más absorción oceánica = más calor = menos hielo. Esto es retroalimentación positiva climática.",
+                    D: "Incorrecto. El hielo derretido no captura carbono per se de manera inmediata.",
+                    study: "Bucles de retroalimentación climática (positivos y negativos) y el concepto de albedo."
+                }
+            },
+            {
+                context: "La transición energética busca sustituir los combustibles fósiles por energías renovables. Sin embargo, la construcción de paneles solares y turbinas eólicas requiere minerales como litio, cobalto y tierras raras, cuya extracción genera impactos ecológicos severos en ecosistemas locales de los países en vías de desarrollo.",
+                q: "Teniendo en cuenta el contexto (CTS), ¿cuál de las siguientes posturas refleja un análisis integral para la toma de decisiones?",
+                options: {
+                    A: "Las energías renovables no sirven porque igual contaminan durante la minería, es mejor continuar con el petróleo y aplicar filtros.",
+                    B: "La minería verde debe priorizarse en la economía global, sin importar la pérdida de biodiversidad local, ya que salvará la atmósfera mundial.",
+                    C: "La transición energética debe ir acompañada de innovaciones en reciclaje tecnológico, economía circular y minería regulada para no trasladar la huella ecológica de la atmósfera a los ecosistemas locales.",
+                    D: "Las naciones industrializadas deben obligar a los países en desarrollo a donar sus tierras raras como pago por la contaminación histórica del primer mundo."
+                },
+                correct: "C",
+                feedback: {
+                    A: "Incorrecto. El balance global de carbono de las renovables sigue siendo vastamente superior al petróleo. El petróleo no es sostenible a largo plazo.",
+                    B: "Incorrecto. El ICFES nunca favorecerá posturas que justifiquen la destrucción de ecosistemas bajo el pretexto del mal menor si carecen de ética ambiental.",
+                    C: "Correcto. Es el análisis CTS perfecto. Reconoce el problema (minería) y postula una solución estructural e integral (economía circular, reciclaje).",
+                    D: "Incorrecto. Postura colonialista, no ética y fuera de los marcos de justicia climática internacional.",
+                    study: "Evaluación multicriterio, desarrollo sostenible y justicia ambiental."
+                }
+            },
+            {
+                context: "La siguiente infografía ilustra la formación de un fenómeno de inversión térmica en un valle industrial (como el de Aburrá en Medellín). Se ve una capa de aire caliente atrapando el humo y contaminantes a ras de ciudad, impidiendo que asciendan.",
+                image: "img/imagen de contexto pregunta 5.png",
+                q: "Si a este escenario meteorológico de 'inversión térmica' le sumamos alta radiación solar y altas emisiones vehiculares (NOx y COV), ¿cuál será la consecuencia química ambiental más probable para la ciudad?",
+                options: {
+                    A: "La dispersión inmediata de los contaminantes hacia la estratosfera, cerrando el agujero de ozono.",
+                    B: "La acumulación severa de esmog fotoquímico tóxico sobre la ciudad al no poder circular el aire contaminado.",
+                    C: "Una intensa lluvia ácida constante, dado que el calor evapora inmediatamente las toxinas.",
+                    D: "La purificación del aire urbano porque la capa caliente actúa como un filtro biológico."
+                },
+                correct: "B",
+                feedback: {
+                    A: "Incorrecto. El ozono estratosférico es bueno, pero aquí no se dispersa porque el aire está atrapado. Además, NOx no cierra agujeros de ozono.",
+                    B: "Correcto. La inversión actúa como una 'tapa'. Los contaminantes se acumulan. Con el sol, NOx y COV reaccionan formando masivamente ozono troposférico (esmog fotoquímico), lo cual es letal para la calidad del aire.",
+                    C: "Incorrecto. Se necesita humedad para la lluvia, y la inversión no garantiza precipitación.",
+                    D: "Incorrecto. Al revés, actúa como una tapa que encierra la contaminación.",
+                    study: "Fenómenos meteorológicos locales (Inversión Térmica) y su agravamiento sobre la calidad del aire."
+                }
+            },
+            {
+                context: "El 'permafrost' es la capa de suelo permanentemente congelado en regiones árticas y subárticas. Además de hielo, almacena enormes cantidades de materia orgánica acumulada durante miles de años. Científicos advierten que el calentamiento global está descongelando el permafrost de Siberia. Cuando esto ocurre, microorganismos descomponen esa materia orgánica y liberan gases de efecto invernadero como metano (CH₄) y dióxido de carbono (CO₂).",
+                q: "¿Por qué el descongelamiento del permafrost es considerado uno de los 'puntos de inflexión' (tipping points) más peligrosos del sistema climático terrestre?",
+                options: {
+                    A: "Porque el hielo contiene altas concentraciones de CFCs atrapados desde la década de 1980 que destruirían el ozono rápidamente.",
+                    B: "Porque el agua derretida inundará todas las minas subterráneas de carbón en Rusia.",
+                    C: "Porque alberga millones de toneladas de materia orgánica que, al descongelarse, será descompuesta por bacterias liberando enormes cantidades de Metano (CH4) y CO2 a la atmósfera.",
+                    D: "Porque el suelo subyacente es negro como el carbón, aumentando drásticamente el efecto albedo del hemisferio norte."
+                },
+                correct: "C",
+                feedback: {
+                    A: "Incorrecto. Los CFCs son gases artificiales sintéticos dispersos en la atmósfera, no congelados masivamente en el suelo ártico de forma natural.",
+                    B: "Incorrecto. Ese es un efecto económico localizado muy específico e improbable como 'punto de inflexión' global.",
+                    C: "Correcto. El permafrost es un almacén gigante de carbono. Si se descongela, la materia muerta de milenios se pudre simultáneamente, emitiendo un volumen de gases que la humanidad no puede controlar (retroalimentación irreversible).",
+                    D: "Incorrecto. Si el suelo fuera oscuro DISMINUIRÍA el albedo. (Alto albedo = más reflexión = más frío).",
+                    study: "Puntos de inflexión climáticos y ciclos biogeoquímicos de la tundra."
+                }
+            },
+            {
+                context: "En el Acuerdo de París (2015), 196 partes acordaron limitar el calentamiento global preferiblemente a 1.5°C respecto a niveles preindustriales. Para lograrlo, los países presentan NDC (Contribuciones Determinadas a Nivel Nacional). Estas incluyen acciones de mitigación, orientadas a reducir las emisiones de gases de efecto invernadero, y acciones de adaptación, destinadas a disminuir la vulnerabilidad frente a los impactos del cambio climático.",
+                q: "¿Qué implica, a nivel de política pública, el cumplimiento de una NDC enfocada en mitigación en un país como Colombia?",
+                options: {
+                    A: "Construir muros de contención más altos en las zonas costeras de Cartagena.",
+                    B: "Desarrollar sistemas de alerta temprana y reubicar comunidades vulnerables a inundaciones en el río Magdalena.",
+                    C: "Incrementar la frontera agrícola talando bosques nativos para producir más biocombustibles.",
+                    D: "Implementar estrategias para reducir a cero la deforestación neta en la Amazonía y transición de flotas de transporte masivo a energía eléctrica."
+                },
+                correct: "D",
+                feedback: {
+                    A: "Incorrecto. Esto es una medida de ADAPTACIÓN, no de mitigación. (Mitigación = frenar las causas/emisiones).",
+                    B: "Incorrecto. También es ADAPTACIÓN (aprender a vivir con el cambio).",
+                    C: "Incorrecto. Talar bosques empeora el problema de emisiones.",
+                    D: "Correcto. Mitigar es reducir la emisión de gases. Colombia emite gran cantidad de GEI por deforestación y transporte. Atacar esos frentes es una política directa de mitigación.",
+                    study: "Diferencia conceptual estricta entre Adaptación climática y Mitigación climática."
+                }
+            },
+            {
+                context: "La tabla muestra el Potencial de Calentamiento Global (PCA) a 100 años de diferentes gases: CO2 (1), Metano (28), Óxido Nitroso (265) y un gas refrigerante HFC-134a (1430).",
+                image: "img/imagen de contexto pregunta 8.png",
+               q: "Si una industria agrícola logra reducir la emisión de 1 tonelada de Óxido Nitroso (N2O), ¿a cuántas toneladas de CO2 equivale este esfuerzo en términos de reducción del calentamiento global a 100 años?",
+                options: {
+                    A: "Aproximadamente 1 tonelada, ya que todos los gases de la tabla se miden por igual.",
+                    B: "Aproximadamente 28 toneladas de CO2.",
+                    C: "Aproximadamente 265 toneladas de CO2.",
+                    D: "Aproximadamente 1430 toneladas de CO2."
+                },
+                correct: "C",
+                feedback: {
+                    A: "Incorrecto. La tabla indica explícitamente multiplicadores distintos.",
+                    B: "Incorrecto. Ese es el multiplicador del Metano.",
+                    C: "Correcto. El PCA (GWP en inglés) significa que 1 ton de N2O calienta la atmósfera lo mismo que 265 tons de CO2 en un siglo. Es pura interpretación de tablas de datos técnicos.",
+                    D: "Incorrecto. Ese es el multiplicador del refrigerante HFC.",
+                    study: "Interpretación de tablas numéricas de equivalencia de Carbono (CO2-eq)."
+                }
+            },
+            {
+                context: "En las ciudades altas (como Bogotá, 2600 msnm), la combustión en motores diésel es menos eficiente por la menor presión de oxígeno atmosférico. Esto provoca altas emisiones de Material Particulado fino (PM2.5), que incluye carbón negro o hollín. Cuando estas partículas se depositan sobre superficies nevadas, las oscurecen y reducen su albedo (capacidad de reflejar radiación solar), favoreciendo una mayor absorción de energía y acelerando el derretimiento del hielo.",
+                q: "Aunque el PM2.5 no es clasificado como un gas de efecto invernadero tradicional como el CO2, ¿qué relación indirecta tiene con el balance energético de la Tierra?",
+                options: {
+                    A: "El carbón negro (hollín) contenido en el PM2.5, al depositarse sobre nevados andinos, oscurece la nieve reduciendo su albedo y acelerando su derretimiento.",
+                    B: "El PM2.5 genera huecos en la atmósfera que permiten escapar todo el calor solar durante la noche.",
+                    C: "El PM2.5 atrapa todo el nitrógeno del aire, evitando la formación de esmog.",
+                    D: "Las partículas viajan exclusivamente al núcleo terrestre donde se almacenan."
+                },
+                correct: "A",
+                feedback: {
+                    A: "Correcto. El 'Black Carbon' es un forzante climático de vida corta. Si cae en nieve (como los nevados del Ruiz, Tolima), la vuelve gris/negra, absorbe sol y se derrite rápidamente.",
+                    B: "Incorrecto. Científicamente sin sentido.",
+                    C: "Incorrecto. El nitrógeno no se 'atrapa' por partículas; de hecho, PM y NOx son precursores de esmog combinados.",
+                    D: "Incorrecto. Geofísicamente imposible.",
+                    study: "Forzantes climáticos climáticos de vida corta (SLCPs) y albedo en alta montaña."
+                }
+            },
+            {
+                context: "Un estudio publicado en Nature evalúa cómo el cambio climático altera la fenología (ciclos de vida biológicos) de plantas e insectos. Determinaron que la primavera se adelanta térmicamente unos 10 días, haciendo que las flores eclosionen antes. Sin embargo, algunas especies de insectos polinizadores y aves migratorias dependen más de señales como la duración del día (fotoperiodo) que de la temperatura, por lo que podrían no adelantar sus ciclos al mismo ritmo.",
+                q: "¿Qué problema ecosistémico severo puede generar este adelanto fenológico (desacoplamiento temporal)?",
+                options: {
+                    A: "Las abejas y aves migratorias que dependen de señales de luz diurna (fotoperiodo) llegarán tarde para la floración, perdiendo su fuente de alimento y afectando la polinización.",
+                    B: "Las flores producirán frutos gigantes que los animales herbívoros no podrán digerir.",
+                    C: "La fotosíntesis se detendrá mundialmente, causando un déficit global inmediato de oxígeno.",
+                    D: "Los insectos evolucionarán pulmones para adaptarse al calor del nuevo clima."
+                },
+                correct: "A",
+                feedback: {
+                    A: "Correcto. Este es el 'desacoplamiento fenológico'. Si una planta florece por calor (que llega antes) pero el ave migra guiada por horas de luz (que no cambian), el ave llega cuando ya no hay flores. Falla la cadena trófica.",
+                    B: "Incorrecto. Absurdo biológicamente.",
+                    C: "Incorrecto. Distractor absoluto ('mundialmente', 'inmediato').",
+                    D: "Incorrecto. La macroevolución no ocurre en 10 años ni por un cambio de primavera.",
+                    study: "Relación clima-biología: Desacoplamiento ecológico y cadenas tróficas."
+                }
+            },
+            {
+                context: "La gráfica de campana de Gauss muestra la distribución histórica de temperaturas. Bajo el calentamiento global, toda la campana se desplaza hacia la derecha (hacia temperaturas más altas).",
+                image: "img/imagen de contexto pregunta 11.png",
+                q: "A nivel probabilístico, el desplazamiento estadístico de esta curva implica fundamentalmente que:",
+                options: {
+                    A: "Ya no habrá días fríos bajo ninguna circunstancia en la Tierra.",
+                    B: "Las temperaturas promedio serán iguales todos los días del año.",
+                    C: "La probabilidad de eventos climáticos extremos cálidos (olas de calor) se incrementa de forma no lineal y drástica, volviendo común lo que antes era raro.",
+                    D: "Los polos de la Tierra invertirán su magnetismo."
+                },
+                correct: "C",
+                feedback: {
+                    A: "Incorrecto. Distractor absoluto ('ya no habrá', 'bajo ninguna circunstancia').",
+                    B: "Incorrecto. La varianza sigue existiendo.",
+                    C: "Correcto. Al desplazar la media (el centro de la campana), el área bajo la curva en la cola derecha (eventos extremos) crece exponencialmente. Una ola de calor 'cada 100 años' pasa a ocurrir 'cada 5 años'.",
+                    D: "Incorrecto. No hay relación causal entre GEI térmicos y magnetosfera.",
+                    study: "Estadística aplicada a la climatología (Interpretación de distribuciones normales)."
+                }
+            },
+            {
+                context: "Los océanos actúan como el principal sumidero de calor de la Tierra, absorbiendo cerca del 90% del exceso de calor generado por el efecto invernadero antropogénico. Debido a su enorme masa, los océanos responden lentamente a los cambios de temperatura, fenómeno conocido como inercia térmica. El agua caliente ocupa más volumen (expansión térmica) y además favorece el derretimiento de glaciares y capas de hielo.",
+                q: "¿Por qué los científicos afirman que incluso si detuviéramos TODAS las emisiones de CO2 hoy mismo, el nivel del mar continuaría subiendo durante varios siglos?",
+                options: {
+                    A: "Porque los peces migraron a las profundidades desplazando agua hacia arriba de forma mecánica.",
+                    B: "Por la inercia térmica de los océanos; el enorme volumen de agua absorbe calor lentamente y continuará expandiéndose térmicamente y derritiendo los bordes de los glaciares debido al calor ya almacenado.",
+                    C: "Porque el viento solar se incrementará automáticamente al no haber contaminación, calentando el agua.",
+                    D: "Porque el ciclo del agua produciría huracanes que físicamente sacarían agua hacia las costas."
+                },
+                correct: "B",
+                feedback: {
+                    A: "Incorrecto. El volumen biológico es insignificante para el nivel del mar global.",
+                    B: "Correcto. Es el concepto de 'Inercia Climática'. El agua tarda mucho en calentarse y en enfriarse. El calor acumulado en las profundidades tardará siglos en equilibrarse con la superficie, causando expansión volumétrica.",
+                    C: "Incorrecto. Relación astrofísica espuria.",
+                    D: "Incorrecto. Los huracanes causan marejadas ciclónicas temporales, no elevación estática y secular del nivel del mar.",
+                    study: "Termodinámica oceánica: capacidad calorífica del agua e inercia térmica."
+                }
+            },
+            {
+                context: "Un grupo de estudiantes debate en clase. Antes de responder, recuerdan que el efecto invernadero es un proceso natural mediante el cual ciertos gases atmosféricos retienen parte del calor terrestre, permitiendo temperaturas aptas para la vida. El calentamiento global actual corresponde al aumento anormal de la temperatura promedio del planeta debido a la intensificación de ese efecto por actividades humanas.",
+                q: "A la luz de los conceptos científicos avalados por el IPCC, ¿quién tiene razón y por qué?",
+                options: {
+                    A: "Juan, porque todo efecto invernadero es sinónimo de contaminación industrial letal.",
+                    B: "María, porque el efecto invernadero es natural y vital; el calentamiento global es el resultado de su desequilibrio o intensificación humana.",
+                    C: "Juan, porque el calentamiento es el proceso químico y el efecto invernadero es la consecuencia climática.",
+                    D: "Ninguno, son términos que los científicos usan indistintamente para referirse a la radiación UV del sol."
+                },
+                correct: "B",
+                feedback: {
+                    A: "Incorrecto. Ignora el efecto natural pre-industrial.",
+                    B: "Correcto. El fenómeno físico es el GEI (natural). El 'Calentamiento Global' es el término diagnóstico para el incremento anómalo de la temperatura global por el GEI antropogénico intensificado.",
+                    C: "Incorrecto. Confunde las definiciones.",
+                    D: "Incorrecto. GEI actúa sobre Infrarrojo (calor terrestre), no UV (que es bloqueado por el Ozono).",
+                    study: "Conceptos fundamentales y precisión en el lenguaje científico ambiental."
+                }
+            },
+            {
+                context: "La Amazonía colombiana sufre altas tasas de deforestación. Los árboles amazónicos realizan un proceso llamado evapotranspiración, liberando vapor de agua que forma los 'ríos voladores', responsables de transportar humedad y favorecer las lluvias en los Andes y otras regiones del continente. Una reducción significativa de la cobertura forestal disminuye este transporte de humedad y altera el ciclo hidrológico regional.",
+                q: "¿Cuál es una consecuencia climática regional directa de sustituir gran parte de este bosque tropical primario por pastizales para ganadería?",
+                options: {
+                    A: "El aumento de las precipitaciones sobre los Andes, ya que el ganado transpira más que los árboles.",
+                    B: "Un congelamiento rápido del bosque remanente por falta de calor biológico.",
+                    C: "La reducción de la evapotranspiración altera el ciclo hidrológico, secando los vientos y generando sequías severas en regiones andinas y agrícolas lejanas.",
+                    D: "El crecimiento desmesurado de corales en el Pacífico debido a la llegada de polvo amazónico seco."
+                },
+                correct: "C",
+                feedback: {
+                    A: "Incorrecto. Las hojas de miles de árboles bombean infinitamente más agua (millones de litros) que un hato ganadero.",
+                    B: "Incorrecto. Al revés, se tendería a la desertificación y aumento de temperatura local por falta de humedad refrigerante.",
+                    C: "Correcto. Menos árboles = menos bombeo de agua a la atmósfera = menos 'ríos voladores' = sequía en zonas de alta montaña y piedemonte (Bogotá depende de esta agua).",
+                    D: "Incorrecto. Es un distractor sin conexión causal lógica en Colombia.",
+                    study: "Hidrología y climatología regional (Los ríos voladores amazónicos)."
+                }
+            },
+            {
+                context: "Para reducir emisiones de GEI, un gobierno propone subsidiar el cambio total de la flota de automóviles a vehículos 100% eléctricos. Un centro de investigación ambiental advierte que la medida es insuficiente si no se observa la matriz energética del país, es decir, las fuentes utilizadas para generar la electricidad (hidroeléctricas, solar, eólica, carbón, gas, entre otras). Si la electricidad proviene principalmente de combustibles fósiles, parte de las emisiones simplemente se trasladan del sector transporte al sector eléctrico.",
+                q: "¿Cuál es el fundamento técnico de la advertencia del centro de investigación?",
+                options: {
+                    A: "Los autos eléctricos emiten gran cantidad de CFCs por el aire acondicionado.",
+                    B: "Si la energía eléctrica con la que se cargan los autos proviene de termoeléctricas de carbón o gas, el problema de las emisiones solo se trasladó del exhosto del auto a la chimenea de la planta de energía.",
+                    C: "Las baterías de litio son altamente explosivas bajo la exposición al sol tropical.",
+                    D: "Los autos eléctricos absorben oxígeno del ambiente, afectando el ciclo respiratorio humano en las grandes ciudades."
+                },
+                correct: "B",
+                feedback: {
+                    A: "Incorrecto. Usan refrigerantes modernos HFC o amoníaco, pero esa no es la falla sistémica principal.",
+                    B: "Correcto. El 'Análisis de Ciclo de Vida' (LCA). Un vehículo eléctrico es tan limpio como la electricidad que lo alimenta. Si quemas carbón para cargarlo, sigue habiendo una huella de carbono masiva.",
+                    C: "Incorrecto. Problema técnico aislado, no fundamente la crítica a las emisiones.",
+                    D: "Incorrecto. Absurdo científico. Los motores eléctricos funcionan con electromagnetismo, no con combustión de oxígeno.",
+                    study: "Transición energética, Matriz Energética y Análisis de Ciclo de Vida de las tecnologías."
+                }
+            }
+        ];
+
+        let icfesTimer;
+        let icfesTimeRemaining = 27 * 60; // 27 minutos
+        let isIcfesActive = false;
+
+        function formatTime(seconds) {
+            const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const s = (seconds % 60).toString().padStart(2, '0');
+            return `${m}:${s}`;
+        }
+
+        function updateTimerDisplay() {
+            document.getElementById('timer-display').innerText = formatTime(icfesTimeRemaining);
+            if (icfesTimeRemaining <= 300) { // 5 minutos restantes
+                document.getElementById('timer-display').classList.add('text-red-600', 'animate-pulse');
+                document.getElementById('timer-display').classList.remove('text-purple-600');
+            } else {
+                document.getElementById('timer-display').classList.remove('text-red-600', 'animate-pulse');
+                document.getElementById('timer-display').classList.add('text-purple-600');
+            }
+        }
+
+        function renderIcfesQuiz() {
+            const container = document.getElementById('icfes-quiz-container');
+            container.innerHTML = '';
+            
+            icfesQuestions.forEach((q, index) => {
+                let html = `
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-md border-l-4 border-purple-500 mb-8" id="icf-card-${index}">
+                    <div class="mb-4 bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <p class="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-2">Contexto Pregunta ${index + 1}</p>
+                        <p class="text-gray-700 text-justify mb-4 leading-relaxed">${q.context}</p>
+                        ${q.image ? `
+                            <div class="my-4 flex flex-col items-center">
+                                <img src="${q.image}" alt="Imagen de contexto para la pregunta ${index+1}" class="rounded shadow-sm max-w-full h-auto mb-3">
+                                ${q.imagePrompt ? `
+                                    <div class="text-left w-full max-w-2xl text-xs text-gray-500 bg-white p-3 rounded border border-purple-200 shadow-inner">
+                                        <strong class="text-purple-700"><i class="fa-solid fa-robot mr-1"></i>Prompt sugerido para IA:</strong><br>
+                                        "${q.imagePrompt}"
+                                    </div>
+                                ` : ''}
+                            </div>
+                        ` : ''}
+                    </div>
+                    <p class="font-bold text-lg text-gray-800 mb-6">${index + 1}. ${q.q}</p>
+                    <div class="space-y-3">
+                `;
+                for (const [letter, text] of Object.entries(q.options)) {
+                    html += `
+                        <label class="flex items-start p-3 rounded-lg border border-gray-200 cursor-pointer hover:bg-purple-50 transition" id="icf-label-${index}-${letter}">
+                            <input type="radio" name="icf-${index}" value="${letter}" class="mt-1 mr-3 h-4 w-4 text-purple-600">
+                            <span class="text-gray-700"><strong class="mr-2">${letter}.</strong> ${text}</span>
+                        </label>
+                    `;
+                }
+                html += `</div>
+                    <div id="icf-feedback-${index}" class="mt-6 hidden p-5 rounded-lg text-sm border-l-4"></div>
+                </div>`;
+                container.innerHTML += html;
+            });
+        }
+
+        function startIcfesTest() {
+            if(isIcfesActive) return;
+            // Reiniciar estado por si acaso
+            icfesTimeRemaining = 27 * 60;
+            updateTimerDisplay();
+            
+            document.getElementById('icfes-intro').classList.add('hidden');
+            document.getElementById('icfes-quiz-area').classList.remove('hidden');
+            document.getElementById('icfes-quiz-results').classList.add('hidden');
+            
+            // Bloquear inputs temporalmente
+            renderIcfesQuiz(); 
+
+            isIcfesActive = true;
+            icfesTimer = setInterval(() => {
+                icfesTimeRemaining--;
+                updateTimerDisplay();
+                if (icfesTimeRemaining <= 0) {
+                    clearInterval(icfesTimer);
+                    isIcfesActive = false;
+                    alert("¡Tiempo finalizado! Entregando respuestas automáticamente.");
+                    checkIcfesQuiz();
+                }
+            }, 1000);
+        }
+
+        function checkIcfesQuiz() {
+            if (!isIcfesActive && icfesTimeRemaining > 0 && document.getElementById('icfes-quiz-area').classList.contains('hidden')) return;
+            
+            clearInterval(icfesTimer);
+            isIcfesActive = false;
+
+            let score = 0;
+            const resultsContainer = document.getElementById('icfes-quiz-results');
+            const feedbackContainer = document.getElementById('icfes-feedback-container');
+            const scoreDisplay = document.getElementById('icfes-score-display');
+            
+            feedbackContainer.innerHTML = ''; 
+
+            icfesQuestions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="icf-${index}"]:checked`);
+                const feedbackDiv = document.getElementById(`icf-feedback-${index}`);
+                feedbackDiv.classList.remove('hidden', 'bg-green-50', 'border-green-500', 'bg-red-50', 'border-red-500', 'bg-yellow-50', 'border-yellow-500');
+                
+                // Deshabilitar radios
+                document.getElementsByName(`icf-${index}`).forEach(r => r.disabled = true);
+
+                Object.keys(q.options).forEach(letter => {
+                    const label = document.getElementById(`icf-label-${index}-${letter}`);
+                    label.classList.remove('correct-answer', 'incorrect-answer');
+                });
+
+                if (!selected) {
+                    feedbackDiv.innerHTML = `<p class="font-bold text-yellow-700 mb-1"><i class="fa-solid fa-circle-exclamation mr-2"></i>Pregunta Omitida.</p>
+                    <p class="text-gray-700">La respuesta correcta era la <strong>${q.correct}</strong>.</p>
+                    <p class="mt-2 text-yellow-800">${q.feedback[q.correct]}</p>`;
+                    feedbackDiv.classList.add('bg-yellow-50', 'border-yellow-500', 'block');
+                    const correctLabel = document.getElementById(`icf-label-${index}-${q.correct}`);
+                    correctLabel.classList.add('correct-answer');
+                    return; 
+                }
+
+                const ans = selected.value;
+                const correctLabel = document.getElementById(`icf-label-${index}-${q.correct}`);
+                
+                if (ans === q.correct) {
+                    score++;
+                    correctLabel.classList.add('correct-answer');
+                    feedbackDiv.classList.add('bg-green-50', 'border-green-500', 'block');
+                    feedbackDiv.innerHTML = `<h4 class="font-bold text-green-700 mb-2 text-base"><i class="fa-solid fa-check-circle mr-2"></i>¡Respuesta Correcta!</h4>
+                    <p class="text-green-900">${q.feedback[ans]}</p>`;
+                } else {
+                    const wrongLabel = document.getElementById(`icf-label-${index}-${ans}`);
+                    wrongLabel.classList.add('incorrect-answer');
+                    correctLabel.classList.add('correct-answer'); 
+                    
+                    feedbackDiv.classList.add('bg-red-50', 'border-red-500', 'block');
+                    feedbackDiv.innerHTML = `<h4 class="font-bold text-red-700 mb-2 text-base"><i class="fa-solid fa-times-circle mr-2"></i>Respuesta Incorrecta</h4>
+                    <p class="text-red-900 mb-3">Tu selección (${ans}): ${q.feedback[ans]}</p>
+                    <div class="bg-white p-3 rounded border border-gray-200">
+                        <p class="text-green-800 font-semibold mb-1">Por qué la ${q.correct} era la correcta:</p>
+                        <p class="text-gray-700">${q.feedback[q.correct]}</p>
+                    </div>
+                    <div class="mt-3 flex items-start">
+                        <i class="fa-solid fa-graduation-cap text-purple-600 mt-1 mr-2"></i>
+                        <p class="text-purple-800 text-xs font-semibold">Competencia a fortalecer: ${q.feedback.study}</p>
+                    </div>`;
+                }
+            });
+
+            resultsContainer.classList.remove('hidden');
+            
+            // Calculo tipo ICFES (sobre 100 puntos hipotéticos)
+            const icfesScore = Math.round((score / 15) * 100);
+            let message = '';
+            if(score >= 12) message = '<span class="text-green-600">¡Nivel Avanzado! Excelente comprensión y lectura crítica.</span>';
+            else if(score >= 8) message = '<span class="text-yellow-600">Nivel Satisfactorio. Buen análisis, pero debes reforzar algunos conceptos.</span>';
+            else message = '<span class="text-red-600">Nivel Básico. Se recomienda repasar fuertemente la sección de Contextualización.</span>';
+
+            scoreDisplay.innerHTML = `Puntaje Global: ${score} de 15 respuestas correctas (Aprox. ${icfesScore}/100 puntos en esta competencia).<br>${message}`;
+            
+            // Scroll a resultados
+            window.scrollTo({ top: document.getElementById('icfes-quiz-results').offsetTop - 50, behavior: 'smooth' });
+        }
+
+        function resetIcfesQuiz() {
+            clearInterval(icfesTimer);
+            isIcfesActive = false;
+            document.getElementById('icfes-intro').classList.remove('hidden');
+            document.getElementById('icfes-quiz-area').classList.add('hidden');
+            document.getElementById('icfes-quiz-results').classList.add('hidden');
+            document.getElementById('timer-display').innerText = "27:00";
+            document.getElementById('timer-display').classList.remove('text-red-600', 'animate-pulse');
+            document.getElementById('timer-display').classList.add('text-purple-600');
+            window.scrollTo({ top: document.getElementById('icfes-quiz').offsetTop, behavior: 'smooth' });
+        }
+
+        const readingsData = [
+            {
+                title: "Reporte de Síntesis del IPCC: Advertencia Final",
+                icon: "fa-book-atlas",
+                content: "El último reporte del Grupo Intergubernamental de Expertos sobre el Cambio Climático (IPCC) subraya una urgencia sin precedentes. A pesar de los esfuerzos diplomáticos globales, las emisiones antropogénicas de dióxido de carbono continúan acumulándose en la atmósfera. Los científicos advierten que la 'ventana de oportunidad para asegurar un futuro habitable y sostenible para todos se está cerrando rápidamente'. Uno de los términos más discutidos en el documento es la <span class='bg-yellow-200 px-1'>inequidad climática</span>; las naciones que históricamente han emitido menos gases de efecto invernadero experimentan desproporcionadamente los impactos más severos, como sequías prolongadas que diezman los cultivos de subsistencia en regiones subsaharianas. El reporte enfatiza la urgencia de pasar de metas declarativas a una implementación radical de resiliencia estructural, transformando la infraestructura de transporte, la matriz energética y los sistemas agroalimentarios mundiales."
+            },
+            {
+                title: "La Acidificación del Océano y su Efecto en los Corales",
+                icon: "fa-water",
+                content: "Investigaciones recientes lideradas por la NOAA exponen cómo la absorción química del carbono está reescribiendo la ecología de los arrecifes. Los océanos del mundo absorben más del 25% del carbono emitido anualmente, actuando como un gigantesco sumidero. Sin embargo, esta mitigación atmosférica tiene un costo biológico masivo: la <span class='bg-yellow-200 px-1'>acidificación oceánica</span>. Al mezclarse con el agua marina, el dióxido de carbono genera ácido carbónico, lo que causa una caída sostenida en el pH. Esto afecta directamente a los organismos marinos que dependen del carbonato de calcio para construir sus esqueletos y conchas, como los pólipos formadores de corales y ciertos moluscos de base trófica. Cuando la concentración de iones carbonato disminuye a niveles críticos en la columna de agua, las estructuras calcáreas de estos organismos, literalmente, comienzan a disolverse, empujando a los ecosistemas marinos más biodiversos del planeta hacia un colapso inminente."
+            },
+            {
+                title: "Deshielo del Permafrost y la 'Bomba de Metano'",
+                icon: "fa-snowflake",
+                content: "En las vastas extensiones de Siberia y Canadá septentrional, una amenaza latente reposa bajo el hielo: el permafrost. Esta gruesa capa de suelo que ha permanecido congelada por milenios encierra una enorme cantidad de materia orgánica preservada (restos de plantas y animales prehistóricos). El veloz incremento de la temperatura en el Ártico está induciendo el deshielo de estas zonas. Al descongelarse la tierra, los microorganismos comienzan a descomponer ferozmente esta materia orgánica. Dado que muchas de estas áreas se inundan transformándose en turberas anaeróbicas, la descomposición bacteriana libera metano (CH4) en lugar de CO2. Este proceso activa una <span class='bg-yellow-200 px-1'>retroalimentación climática positiva</span>, donde el gas liberado (decenas de veces más potente que el CO2 para atrapar calor a corto plazo) propicia un mayor calentamiento global, acelerando a su vez más derretimiento de suelo en una espiral difícil de revertir."
+            },
+            {
+                title: "El Fenómeno de El Niño en un Mundo más Cálido",
+                icon: "fa-cloud-sun-rain",
+                content: "El Niño-Oscilación del Sur (ENOS) es un patrón climático natural caracterizado por el calentamiento irregular de las aguas del Océano Pacífico ecuatorial, lo cual interrumpe los vientos alisios y altera el clima global. Científicos de la Universidad de Columbia postulan que, si bien El Niño es un fenómeno natural histórico, su <span class='bg-yellow-200 px-1'>sinergia</span> con el calentamiento global antropogénico está exacerbando sus impactos. Durante un 'Súper Niño', el calor adicional latente en los océanos actúa como un turbo para la transferencia de energía térmica a la atmósfera. Para Sudamérica, particularmente en la vertiente del Pacífico, esto puede traducirse en avalanchas devastadoras y lluvias torrenciales (huaicos), mientras que, paradójicamente, otras regiones como el interior de Colombia o partes de la Amazonía experimentan sequías abrasadoras. El clima global ya no opera bajo las líneas de base históricas."
+            },
+            {
+                title: "La Transición Energética y el Cuello de Botella del Litio",
+                icon: "fa-battery-full",
+                content: "El consenso global dicta que para frenar el efecto invernadero debemos electrificar nuestro consumo y basarlo en fuentes renovables (solar, eólica). El almacenamiento de esta energía intermitente requiere de baterías de ion-litio de alta capacidad. No obstante, la frenética demanda de 'oro blanco' expone un complejo dilema ético y ecológico. En la región del Triángulo del Litio (formado por zonas de Argentina, Bolivia y Chile), la extracción evaporítica a gran escala consume volúmenes inmensos de aguas subterráneas fósiles. Esto provoca la <span class='bg-yellow-200 px-1'>desecación salina</span> de lagunas altoandinas que sustentan ecosistemas únicos, como los flamencos, y compromete el suministro de agua para comunidades indígenas locales. Resolver el cambio climático modificando nuestro vector energético sin un escrutinio de cadena de suministro podría crear una solución atmosférica que genera un desastre hidrológico regional."
+            },
+            {
+                title: "Migraciones Climáticas: Los Refugiados del Siglo XXI",
+                icon: "fa-person-walking-luggage",
+                content: "El cambio climático está dejando de ser exclusivamente una métrica de temperatura para convertirse en el motor principal de desplazamientos demográficos a nivel global. El Banco Mundial estima que para el año 2050, cerca de 216 millones de personas podrían verse forzadas a abandonar sus hogares debido a impactos climáticos si no se toman medidas drásticas de contención y apoyo. Estos desplazamientos, categorizados como <span class='bg-yellow-200 px-1'>migración forzada endémica</span>, están impulsados primariamente por el aumento del nivel del mar que saliniza los deltas fértiles (como el de Bangladesh) impidiendo la agricultura, por sequías interanuales en África oriental que diezman la economía ganadera nómada, y por eventos de lluvia extrema que destruyen infraestructura en Centroamérica. Estos migrantes, a menudo llamados 'refugiados climáticos', enfrentan vacíos jurídicos, pues el derecho internacional actual no los cobija bajo la convención de refugiados de 1951, que prioriza la persecución política."
+            },
+            {
+                title: "Efecto Albedo Urbano: El Combate contra las Islas de Calor",
+                icon: "fa-city",
+                content: "A medida que el planeta se calienta por la retención global de radiación infrarroja, las ciudades enfrentan un infierno adicional: el Efecto Isla de Calor Urbana (ICU). Las densas metrópolis de asfalto oscuro, hormigón y escasa vegetación absorben una gran cantidad de la radiación incidente durante el día y la liberan lentamente por la noche, impidiendo el refrescamiento nocturno. En respuesta, arquitectos urbanistas y científicos promueven estrategias de modificación de la superficie. Una de las más efectivas y económicas es la manipulación artificial del <span class='bg-yellow-200 px-1'>albedo reflectivo</span>. Pintar techos de blanco (cool roofs) y usar pavimentos claros aumenta la reflectividad de la ciudad, devolviendo un porcentaje sustancial de radiación solar de onda corta de vuelta al espacio antes de que pueda ser absorbida y convertida en calor palpable, aliviando la carga térmica de los habitantes y reduciendo la demanda letal de aire acondicionado."
+            },
+            {
+                title: "Ganadería, Metano y Alternativas Proteicas",
+                icon: "fa-cow",
+                content: "El sector agrícola es un actor de peso pesado en el presupuesto global de carbono, y la ganadería de rumiantes (como vacas, ovejas y cabras) es la principal culpable. El sistema digestivo de estos animales, mediante un proceso llamado fermentación entérica en sus estómagos multicamerales, produce enormes cantidades de metano (CH4), expulsado a través de eructos. Estudios de la FAO sugieren que el sector ganadero es responsable de casi el 14.5% de todas las emisiones de gases de efecto invernadero derivadas del hombre. Ante este panorama, se exploran soluciones de <span class='bg-yellow-200 px-1'>mitigación biotecnológica</span>. Estas van desde modificar la dieta de las vacas incluyendo ciertas macroalgas rojas (Asparagopsis taxiformis) que inhiben las enzimas productoras de metano en el estómago del animal, hasta cambios a nivel macroeconómico, fomentando las proteínas de origen vegetal o el desarrollo comercial de carne cultivada en laboratorios biológicos."
+            },
+            {
+                title: "Sumideros Naturales: La Importancia de las Turberas",
+                icon: "fa-leaf",
+                content: "A menudo se considera erróneamente que los bosques tropicales son los almacenes definitivos de carbono terrestre, dejando en segundo plano a los humedales y, muy específicamente, a las turberas (pequeños pantanos ricos en materia orgánica descompuesta a medias). Aunque las turberas cubren apenas el 3% de la superficie terrestre mundial, almacenan casi un tercio de todo el carbono retenido en los suelos globales—el doble que todos los bosques del mundo combinados. La <span class='bg-yellow-200 px-1'>anoxia hídrica</span> (falta de oxígeno por saturación de agua) inhibe la descomposición total de las plantas muertas, apilando carbono capa por capa durante milenios. Cuando las turberas son drenadas intencionalmente para convertirlas en plantaciones agrícolas (como las de aceite de palma en el sudeste asiático) o son devastadas por incendios, el carbono sellado reacciona rápidamente con el oxígeno y es arrojado de vuelta a la atmósfera a velocidades catastróficas."
+            },
+            {
+                title: "Gases Fluorados y la Paradoja de los Refrigerantes",
+                icon: "fa-spray-can",
+                content: "El Protocolo de Montreal de 1987 es considerado el tratado ambiental más exitoso de la historia, pues eliminó gradualmente los clorofluorocarbonos (CFCs) que estaban destruyendo la capa de ozono estratosférica que nos protege de la radiación ultravioleta. Para reemplazarlos en neveras y sistemas de aire acondicionado industrial, la química moderna creó los Hidrofluorocarbonos (HFCs). Estos no dañan la capa de ozono (salvaron esa crisis), pero ocultaban un nuevo peligro: poseen una capacidad de atrapar radiación térmica miles de veces superior a la del CO2. Es decir, son supercontaminantes climáticos. Afrontar el calentamiento implica lidiar con esta <span class='bg-yellow-200 px-1'>iatrogenia tecnológica</span> ambiental, obligando a la firma reciente de la Enmienda de Kigali, que exige ahora reducir progresivamente estos HFCs y reemplazarlos por alternativas naturales como el amoníaco, el CO2 puro o los hidrocarburos refinados."
+            }
+        ];
+
+        function renderReadings() {
+            const grid = document.getElementById('readings-grid');
+            grid.innerHTML = '';
+            readingsData.forEach((reading, index) => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-6 rounded-xl shadow-md cursor-pointer hover:shadow-xl hover:scale-105 transition transform text-center border-b-4 border-amber-500 flex flex-col justify-between";
+                card.onclick = () => openReading(index);
+                card.innerHTML = `
+                    <i class="fa-solid ${reading.icon} text-4xl text-amber-500 mb-4 drop-shadow-sm"></i>
+                    <h4 class="font-bold text-gray-800 leading-snug">${reading.title}</h4>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function openReading(index) {
+            const data = readingsData[index];
+            document.getElementById('readings-grid').classList.add('hidden');
+            
+            const detailView = document.getElementById('reading-detail');
+            document.getElementById('reading-detail-icon').className = `fa-solid ${data.icon} text-5xl text-amber-500 mb-4`;
+            document.getElementById('reading-detail-title').innerText = data.title;
+            
+            // Reemplazar saltos de línea y formatear
+            document.getElementById('reading-detail-content').innerHTML = `<p>${data.content}</p>
+            <div class="mt-6 p-4 bg-amber-50 border-l-4 border-amber-500 text-sm text-gray-700">
+                <i class="fa-solid fa-graduation-cap mr-2"></i> <strong>Actividad recomendada:</strong> Identifica el término resaltado en amarillo. Sin usar diccionario, deduce su significado analizando exclusivamente las palabras e ideas que lo rodean en el texto.
+            </div>`;
+            
+            detailView.classList.remove('hidden');
+            detailView.classList.add('fade-in');
+        }
+
+        function backToReadings() {
+            document.getElementById('reading-detail').classList.add('hidden');
+            document.getElementById('readings-grid').classList.remove('hidden');
+        }
+
+        window.onload = function() {
+            renderSimpleQuiz();
+            // renderIcfesQuiz() se llama en Iniciar Prueba para no cargar el dom inútilmente.
+            renderReadings();
+            
+            // Navegación automática por botones (resaltado)
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    buttons.forEach(b => b.classList.remove('bg-emerald-900', 'border-b-4', 'border-white'));
+                    if (this.dataset.target !== 'home') {
+                        this.classList.add('bg-emerald-900', 'border-b-4', 'border-white');
+                    }
+                });
+            });
+        };
+    </script>
+</body>
+</html>
